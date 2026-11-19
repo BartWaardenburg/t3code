@@ -30,4 +30,7 @@ jobs:
           nproc
           t() { local s e; s=$(date +%s.%N); (cd "$1" && pnpm exec vp run "$2" >/dev/null 2>&1); echo "rc=$?"; e=$(date +%s.%N); echo "$2 $(echo "$e - $s" | bc)" | tee -a times.txt; }
           for i in 1 2 3 4 5 6; do t base knip:check; t head fallow:check; done
+          echo "--- fallow without its cache" | tee -a times.txt
+          for i in 1 2 3 4 5 6; do rm -rf head/.fallow; t head fallow:check; done
+          ls -a head | grep -i fallow
           { echo '```'; cat times.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
