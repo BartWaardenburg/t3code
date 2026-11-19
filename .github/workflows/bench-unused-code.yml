@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: pingdotgg/t3code
-          ref: 05e3674636
+          ref: "05e36746364bef7778ee9f2cc07dc2a3d4fe210b"
           path: base
       - uses: actions/setup-node@v4
         with:
