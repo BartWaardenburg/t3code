@@ -1038,10 +1038,16 @@ const make = Effect.gen(function* () {
     const active = latestActiveRun(records);
     // A turn that ended without its result still owes it: the agent may have ended it to wait
     // for something, and answer from the turn that woke it.
-    const asked = records.runs
-      .filter((candidate) => candidate.outputSchema !== undefined)
+    // Only an ended turn can owe one; a queued or running turn asked for one answers for itself.
+    const owed = records.runs
+      .filter(
+        (candidate) =>
+          candidate.outputSchema !== undefined &&
+          candidate.output === undefined &&
+          candidate.status === "completed",
+      )
       .toSorted((left, right) => right.ordinal - left.ordinal)[0];
-    const run = active?.outputSchema !== undefined || asked?.output !== undefined ? active : asked;
+    const run = active?.outputSchema !== undefined ? active : owed;
     if (active === undefined || run?.outputSchema === undefined) {
       return yield* new ThreadManagementRunOutputRejectedError({
         threadId: input.threadId,
