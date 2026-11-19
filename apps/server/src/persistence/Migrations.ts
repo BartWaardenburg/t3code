@@ -107,6 +107,14 @@ import Migration0096 from "./Migrations/096_RepairStaleTitleRegeneration.ts";
 import Migration0097 from "./Migrations/097_IssueTrackerBindings.ts";
 import Migration0098 from "./Migrations/098_ActiveShellIndexIndexes.ts";
 import Migration0099 from "./Migrations/099_BackgroundRecoveryIndexes.ts";
+import Migration0100 from "./Migrations/100_Workflows.ts";
+import Migration0101 from "./Migrations/101_WorkflowTriggers.ts";
+import Migration0102 from "./Migrations/102_WorkflowStepEnvironment.ts";
+import Migration0103 from "./Migrations/103_WorkflowRunInput.ts";
+import Migration0104 from "./Migrations/104_WorkflowStore.ts";
+import Migration0105 from "./Migrations/105_WorkflowRunParent.ts";
+import Migration0106 from "./Migrations/106_WorkflowStepResult.ts";
+import Migration0107 from "./Migrations/107_WorkflowWaitWatch.ts";
 
 const migrationEntries = [
   [1, "OrchestrationEvents", Migration0001],
@@ -209,6 +217,14 @@ const migrationEntries = [
   [97, "IssueTrackerBindings", Migration0097],
   [98, "ActiveShellIndexIndexes", Migration0098],
   [99, "BackgroundRecoveryIndexes", Migration0099],
+  [100, "Workflows", Migration0100],
+  [101, "WorkflowTriggers", Migration0101],
+  [102, "WorkflowStepEnvironment", Migration0102],
+  [103, "WorkflowRunInput", Migration0103],
+  [104, "WorkflowStore", Migration0104],
+  [105, "WorkflowRunParent", Migration0105],
+  [106, "WorkflowStepResult", Migration0106],
+  [107, "WorkflowWaitWatch", Migration0107],
 ] as const;
 
 export const migrationManifest = migrationEntries.map(([id, name]) => [id, name] as const);
